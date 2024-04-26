@@ -134,32 +134,40 @@ variable "ami_filters" {
   description = "AMI filters"
 
   type = object({
-    enabled = optional(bool, false)
-
-    # (Optional) Limit search to userswith explicit launch permission on the
-    # image. Valid items are the numeric account ID or self. Defaults to null.
-    executable_users = optional(list(string), null)
-
-    # (Optional) If true, all deprecated AMIs are included in the response. If
-    # false, no deprecated AMIs are included in the response. If no value is
-    # specified, the default value is false. Defaults to false.
+    enabled            = optional(bool, false)
+    executable_users   = optional(list(string), null)
     include_deprecated = optional(bool, false)
-
-    # (Optional) If more than one result is returned, use the most recent AMI.
-    # Defaults to true.
-    most_recent = optional(bool, true)
-
-    # (Optional) List of AMI owners to limit search. Valid values: an AWS
-    # account ID, self (the current account), or an AWS owner alias (e.g.,
-    # amazon, aws-marketplace, microsoft). Defaults to ["amazon"]
-    owners = optional(list(string), ["amazon"])
-
-    # (Optional) One or more name/value pairs to filter off of. There are 
-    # several valid keys, for a full reference, check out this link:
-    #
-    # https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html
-    filter = optional(any, {})
+    most_recent        = optional(bool, true)
+    owners             = optional(list(string), ["amazon"])
+    filter             = optional(any, {})
   })
+
+  #############################################################################
+  # Descriptions
+  #############################################################################
+  #
+  # executable_users   : (Optional) Limit search to userswith explicit launch
+  #                      permission on the image. Valid items are the numeric
+  #                      account ID or self. Defaults to null.
+  #
+  # include_deprecated : (Optional) If true, all deprecated AMIs are included
+  #                      in the response. If false, no deprecated AMIs are
+  #                      included in the response. If no value is specified,
+  #                      the default value is false. Defaults to false.
+  #
+  # most_recent        : (Optional) If more than one result is returned, use 
+  #                      the most recent AMI. Defaults to true.
+  #
+  # owners             : (Optional) List of AMI owners to limit search. Valid
+  #                      values: an AWS account ID, self (the current account),
+  #                      or an AWS owner alias (e.g. amazon, aws-marketplace,
+  #                      microsoft). Defaults to ["amazon"]
+  #
+  # filter             : (Optional) One or more name/value pairs to filter off
+  #                      of. There are several valid keys, for a full reference
+  #                      check out this link:
+  #
+  # https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html
 
   default = {}
 }

@@ -171,19 +171,22 @@ resource "aws_volume_attachment" "this" {
 
 locals {
   # Force setting custom tags for the root block device
-  root_block_device = [
-    merge(
-      var.root_block_device[0],
-      {
-        tags = merge(
-          var.tags,
-          {
-            Name = "${var.name}_bootdisk"
-          }
-        )
-      }
-    )
-  ]
+  root_block_device = try(
+    [
+      merge(
+        var.root_block_device[0],
+        {
+          tags = merge(
+            var.tags,
+            {
+              Name = "${var.name}_bootdisk"
+            }
+          )
+        }
+      )
+    ],
+    []
+  )
 }
 
 module "ec2_instance" {

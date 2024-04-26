@@ -1,6 +1,6 @@
 locals {
   tags = {
-    Creator = "arengifo"
+    Creator = "admin"
     ENV     = "DEV"
   }
 }
@@ -9,9 +9,9 @@ module "ec2_instance" {
   source = "../../"
 
   instance_type = "t3a.small"
-  key_name      = "arengifo"
-  name          = "basic-ubuntu"
-  subnet_id     = "subnet-0b6812155c4386266"
+  key_name      = "admin-key"
+  name          = "ubuntu-01"
+  subnet_id     = "subnet-aaabbbcccdddeeeff"
 
   create_custom_security_group = true
 
